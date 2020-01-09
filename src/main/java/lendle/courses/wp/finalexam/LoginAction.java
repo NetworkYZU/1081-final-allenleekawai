@@ -6,6 +6,7 @@
 package lendle.courses.wp.finalexam;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,10 @@ public class LoginAction extends HttpServlet {
         //並轉址到 showNotes.jsp
         //否則轉址到 index.jsp
         //請使用外轉址 (30%)
+        if(session.getAttribute(id)==id && session.getAttribute(password)==password)
+            response.sendRedirect("showNotes.jsp");
+        else
+            response.sendRedirect("index.jsp");
         
         ////////////////////////////////////////////////////
     }

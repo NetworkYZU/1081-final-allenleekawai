@@ -15,6 +15,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.ServletResponseWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -72,8 +73,12 @@ public class LoginFilter implements Filter {
             HttpSession session=httpRequest.getSession();
             //完成 filter 的部分，當 session 中沒有 user 參數時，轉址到 /login.jsp
             //否則正常執行 (30%)
-            
-            
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+            HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+            if(session.getAttribute("id") != null)
+                chain.doFilter(request, response);
+            else
+                httpServletResponse.sendRedirect("login.jsp");
             ///////////////////////////////////////////////////////////////
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,

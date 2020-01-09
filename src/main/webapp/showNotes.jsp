@@ -33,7 +33,15 @@
               </tr>
           </thead>
           <tbody>
-              
+            <ol>
+                <%
+                    ArrayList list=(ArrayList)session.getAttribute("notes");
+                    for(int i=0; list!=null && i<list.size(); i++) {
+                        String t=(String)list.get(i);
+                        out.println("<tr><td><li>" + t + "</li></td></tr>");
+                    }
+                %>
+            </ol>
           </tbody>
       </table>
     </body>
